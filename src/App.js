@@ -5,6 +5,8 @@ import About from "../src/Components/Home/About/About";
 import Contact from "../src/Components/Contact/Contact";
 import Dashboard from "../src/Components/Dashboard/Dashboard";
 import Home from "../src/Components/Home/Home/Home";
+import AllCourseList from "../src/Components/AllCourseList/AllCourseList";
+import Courses from "../src/Components/Home/Courses/Courses";
 import Login from "./Components/Login/Login";
 import NotFound from "./Components/NotFound/NotFound";
 import Register from "./Components/Register/Register";
@@ -44,7 +46,6 @@ import History from "./Components/Dashboard/Admin/History";
 import Bestperformer from "./Components/TeachersDashboard/Bestperformer/Bestperformer";
 import PostNotice from "./Components/TeachersDashboard/PostNotice/PostNotice";
 import PostBlog from "./Components/PostBlog/PostBlog";
-import AllCoursesPage from "./Components/AllCoursesPage/AllCoursesPage";
 import AllBlogsPage from "./Components/AllBlogsPage/AllBlogsPage";
 import NewsletterList from "./Components/NewsletterList/NewsletterList";
 import PostNewsLetter from "./Components/PostNewsLetter/PostNewsLetter";
@@ -60,8 +61,28 @@ import SupportSessionList from "./Components/Home/SupportSession/SupportSessionL
 import ChatBot006 from "./Components/Shared/ChatBot006/ChatBot006";
 import Mails from "./Components/Dashboard/Mails/Mails";
 import AllUsers from "./Components/Dashboard/AllUsers/AllUsers";
-
+import Admins from "../src/Components/Shared/Footer/Admins/Admins";
+import Developers from "../src/Components/Shared/Footer/Developers/Developers";
+import Terms from "../src/Components/Shared/Footer/Terms/Terms";
+import CareerGuides from "../src/Components/Shared/Footer/CareerGuides/CareerGuides";
+import Faq from "../src/Components/Shared/Footer/Faq/Faq";
+import GameDevCourses from "../src/Components/Home/CourseCategories/GameDevCourses/GameDevCourses";
+import AiCourses from "../src/Components/Home/CourseCategories/AiCourses/AiCourses";
+import MachineCourses from "../src/Components/Home/CourseCategories/MachineCourses/MachineCourses";
+import SoftDevCourses from "../src/Components/Home/CourseCategories/SoftDevCourses/SoftDevCourses";
+import ProgrammingCourses from "../src/Components/Home/CourseCategories/ProgrammingCourses/ProgrammingCourses";
+import WebDevCourses from "../src/Components/Home/CourseCategories/WebDevCourses/WebDevCourses";
+import MyClasess from "./Components/StudentDashboard/MyClasess/MyClasess";
+import Success from "./Components/Payment/Success/Success";
+import TeacherRoute from "./Components/Login/TeacherRoute/TeacherRoute";
+import AdminRoute from "./Components/Login/AdminRoute/AdminRoute";
+import StudentRoute from "./Components/Login/StudentRoute/StudentRoute";
+import UserActivities from "./Components/Dashboard/Admin/Chart/UserActivities";
+import MyProfile from "./Components/TeachersDashboard/MyProfile/Myprofile";
+import Test2 from "./Components/Test/Test2";
+import { CleanConsole } from "@eaboy/clean-console";
 function App() {
+	CleanConsole.init();
 	return (
 		<div className='App'>
 			<BrowserRouter>
@@ -77,11 +98,11 @@ function App() {
 							<Route path='/' element={<Home />} />
 							<Route path='/home' element={<Home />} />
 							<Route path='/blog' element={<AllBlogsPage />} />
+							<Route path='/allCourseList' element={<AllCourseList />} />
 							<Route path='/singleblog/:id' element={<SingleBlogMain />} />
 							<Route path='/about' element={<About />} />
-							<Route path='/courses' element={<AllCoursesPage />} />
+							<Route path='/courses' element={<Courses />} />
 							<Route path='/singlecourse/:id' element={<SingleCourse />} />
-							<Route path='/milestone/:id' element={<Milestones />} />
 							<Route path='/contact' element={<Contact />} />
 							<Route path='/register' element={<Register />} />
 							<Route path='/login' element={<Login />} />
@@ -89,9 +110,33 @@ function App() {
 							<Route path='/resetpassword' element={<ResetPass />} />
 							<Route path='/greetings' element={<Greetings />} />
 							<Route path='/userProfile' element={<UserProfile />} />
+							<Route path='/OurAdmins' element={<Admins />} />
+							<Route path='/OurDevelopers' element={<Developers />} />
+							<Route path='/CareerGuideline' element={<CareerGuides />} />
+							<Route path='/OurTerms' element={<Terms />} />
+							<Route path='/Faq' element={<Faq />} />
+							<Route path='/GameDevCourses' element={<GameDevCourses />} />
+							<Route path='/AiCourses' element={<AiCourses />} />
+							<Route path='/MachineCourses' element={<MachineCourses />} />
+							<Route path='/SoftDevCourses' element={<SoftDevCourses />} />
+							<Route path='/WebDevCourses' element={<WebDevCourses />} />
+							<Route
+								path='/ProgrammingCourses'
+								element={<ProgrammingCourses />}
+							/>
 							<Route path='/test' element={<Test />} />
-
-							<Route path='/studentdashboard' element={<StudentDashboard />}>
+							<Route path='/test2' element={<Test2 />} />
+							<Route
+								path='/studentdashboard'
+								element={
+									<StudentRoute>
+										<StudentDashboard />
+									</StudentRoute>
+								}>
+								<Route
+									path='/studentdashboard/milestone/:id'
+									element={<Milestones />}
+								/>
 								<Route path='/studentdashboard' element={<StudentProfile />} />
 								<Route
 									path='/studentdashboard/address'
@@ -114,13 +159,22 @@ function App() {
 									element={<AllLiveSupportSessions />}
 								/>
 								<Route
+									path='/studentdashboard/myCourse'
+									element={<MyClasess />}
+								/>
+								<Route
 									path='/studentdashboard/skills'
 									element={<StudentSkills />}
 								/>
 							</Route>
-
 							{/* //Dashboard Nested Routing */}
-							<Route path='/dashboard' element={<Dashboard />}>
+							<Route
+								path='/dashboard'
+								element={
+									<AdminRoute>
+										<Dashboard />
+									</AdminRoute>
+								}>
 								<Route exact path='/dashboard' element={<CoursesList />} />
 								<Route path='/dashboard/blogs' element={<AllBlogs />} />
 								<Route
@@ -166,13 +220,27 @@ function App() {
 									element={<RecycleBin />}
 								/>
 								<Route path='/dashboard/admin/history' element={<History />} />
+								<Route
+									path='/dashboard/admin/userActivity'
+									element={<UserActivities />}
+								/>
 							</Route>
-
-							<Route path='/teachersDashboard' element={<TeachersDashboard />}>
+							<Route
+								path='/teachersDashboard'
+								element={
+									<TeacherRoute>
+										<TeachersDashboard />
+									</TeacherRoute>
+								}>
 								<Route
 									exact
 									path='/teachersDashboard/allTeachers'
 									element={<AllTeachers />}
+								/>
+								<Route
+									exact
+									path='/teachersDashboard/profile'
+									element={<MyProfile />}
 								/>
 								<Route
 									path='/teachersDashboard/bestPerformer'
@@ -223,6 +291,7 @@ function App() {
 									element={<PostNotice />}
 								/>
 							</Route>
+							<Route path='/success/:id' element={<Success />} />;
 						</Routes>
 					</div>
 					<Footer />

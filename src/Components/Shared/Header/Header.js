@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+	faRightFromBracket,
+	faBars,
+	faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
 import useAuth from "../../../hooks/useAuth";
 // import { HashLink } from "react-router-hash-link";
@@ -27,7 +31,7 @@ const Header = () => {
 		}
 	}, [location, hide]);
 
-	const { user, logOut } = useAuth();
+	const { role, user, logOut } = useAuth();
 
 	const toggleFunction = () => {
 		const toggleButton = document.getElementById("toogleDiv");
@@ -84,10 +88,11 @@ const Header = () => {
 						<Link to='/home'>
 							<img
 								className='hidden lg:block'
-								height='230'
-								width='130'
-								src='https://i.ibb.co/HzzW0Xv/logo.png'
-								alt='Workflow'
+								height='190'
+								width='90'
+								// src="https://i.ibb.co/mbrPZ39/edu-buddies.png"
+								src='https://i.ibb.co/mbrPZ39/edu-buddies.png'
+								alt='Logo'
 							/>
 						</Link>
 					</div>
@@ -101,18 +106,18 @@ const Header = () => {
 								</Link>
 								<Link
 									className='text-gray-100 hover:bg-red-600 focus:bg-red-600 px-3 py-2 rounded-md text-md font-medium'
-									to='/Courses'>
+									to='/about'>
+									About
+								</Link>
+								<Link
+									className='text-gray-100 hover:bg-red-600 focus:bg-red-600 px-3 py-2 rounded-md text-md font-medium'
+									to='/allCourseList'>
 									Courses
 								</Link>
 								<Link
 									className='text-gray-100 hover:bg-red-600 focus:bg-red-600 px-3 py-2 rounded-md text-md font-medium'
 									to='/blog'>
 									Blog
-								</Link>
-								<Link
-									className='text-gray-100 hover:bg-red-600 focus:bg-red-600 px-3 py-2 rounded-md text-md font-medium'
-									to='/about'>
-									About
 								</Link>
 								<Link
 									className='text-gray-100 hover:bg-red-600 focus:bg-red-600 px-3 py-2 rounded-md text-md font-medium'
@@ -146,7 +151,7 @@ const Header = () => {
                 absolute 
                 right-0 
                 top-2
-                w-40 
+                w-44 
                 shadow-lg 
                 py-1 
                 px-1
@@ -163,7 +168,23 @@ const Header = () => {
 										<div className='px-3 py-2 text-left'>
 											<span className='text-sm'>Signed In As</span>
 											<br />
-											<span>{user.displayName}</span>
+											<div className='flex flex-col justify-start'>
+												<span>{user.displayName}</span>
+												{/* <Link to="/wishCart" className="flex justify-start">
+                          <div className="pt-1">
+                            <FontAwesomeIcon
+                              className="text-red-500 pt-1.5 text-lg"
+                              icon={faCartShopping}
+                            />
+                            <div
+                              style={{ fontSize: "12px" }}
+                              className="text-red-500 font-black absolute left-9 top-14"
+                            >
+                              3
+                            </div>
+                          </div>
+                        </Link> */}
+											</div>
 										</div>
 										<hr />
 										<Link
@@ -172,24 +193,38 @@ const Header = () => {
 											View Profile
 										</Link>
 										<hr />
-										<Link
-											className='text-black-200 hover:bg-red-600 focus:bg-red-600 px-3 py-2 text-left text-md font-medium block hover:text-white'
-											to='/dashboard'>
-											Dashboard
-										</Link>
-										<hr />
-										<Link
-											className='text-black-200 hover:bg-red-600 focus:bg-red-600 px-3 py-2 text-left text-md font-medium block hover:text-white'
-											to='/teachersDashboard'>
-											Teachers DB
-										</Link>
-										<hr />
-										<Link
-											className='text-black-200 hover:bg-red-600 focus:bg-red-600 px-3 py-2 text-left text-md font-medium block hover:text-white'
-											to='/studentdashboard'>
-											Student DB
-										</Link>
-										<hr />
+										{role === "Admin" && (
+											<div>
+												<Link
+													className='text-black-200 hover:bg-red-600 focus:bg-red-600 px-3 py-2 text-left text-md font-medium block hover:text-white'
+													to='/dashboard'>
+													Dashboard
+												</Link>
+												<hr />
+											</div>
+										)}
+
+										{role === "Instructor" && (
+											<div>
+												<Link
+													className='text-black-200 hover:bg-red-600 focus:bg-red-600 px-3 py-2 text-left text-md font-medium block hover:text-white'
+													to='/teachersDashboard'>
+													Dashboard
+												</Link>
+												<hr />
+											</div>
+										)}
+
+										{role === "Student" && (
+											<div>
+												<Link
+													className='text-black-200 hover:bg-red-600 focus:bg-red-600 px-3 py-2 text-left text-md font-medium block hover:text-white'
+													to='/studentdashboard'>
+													Dashboard
+												</Link>
+												<hr />
+											</div>
+										)}
 										{user?.email && (
 											<p className='text-black-200 hover:bg-red-600 focus:bg-red-600 px-3 py-2 text-left text-md font-medium block hover:text-white'>
 												<button onClick={logOut}>Log Out</button>
@@ -223,7 +258,7 @@ const Header = () => {
 						About
 					</Link>
 					<Link
-						to='/courses'
+						to='/allCourseList'
 						className='text-gray-100 hover:bg-red-600 focus:bg-red-600 block px-3 py-2 rounded-md text-base font-medium'>
 						Courses
 					</Link>

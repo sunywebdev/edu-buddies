@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faFacebook,
@@ -8,6 +8,14 @@ import {
 import "./Teachers.css";
 
 const Teachers = () => {
+	const [teachers, setTeachers] = useState([]);
+	useEffect(() => {
+		fetch("https://fierce-caverns-90976.herokuapp.com/teachers")
+			.then((res) => res.json())
+			.then((data) => setTeachers(data));
+	}, []);
+	console.log("teachers", teachers);
+
 	return (
 		<div className='teachers mb-20'>
 			<div className='team-area'>
@@ -18,8 +26,54 @@ const Teachers = () => {
 						help.
 					</p>
 				</div>
-
-				<div className='team-box mx-auto'>
+				<div className='grid gap-6 grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 mx-auto'>
+					{teachers?.slice(0, 3).map((teacher, key) => (
+						<div className='box pb-6'>
+							<div className='teachers-box'>
+								<img src={teacher?.photoURL} alt={teacher?.displayName} />
+							</div>
+							<div>
+								<h2 className='mt-4'>{teacher?.displayName}</h2>
+								<span>{teacher?.designation}</span>
+								<ul>
+									<li>
+										<a
+											target='_blank'
+											rel='noopener noreferrer'
+											href={teacher?.facebook}>
+											<FontAwesomeIcon
+												className='text-gray-700 text-3xl mx-2'
+												icon={faFacebook}
+											/>
+										</a>
+									</li>
+									<li>
+										<a
+											target='_blank'
+											rel='noopener noreferrer'
+											href={teacher?.twitter}>
+											<FontAwesomeIcon
+												className='text-gray-700 text-3xl mx-2'
+												icon={faTwitter}
+											/>
+										</a>
+									</li>
+									<li>
+										<a
+											target='_blank'
+											rel='noopener noreferrer'
+											href={teacher?.linkedin}>
+											<FontAwesomeIcon
+												className='text-gray-700 text-3xl mx-2'
+												icon={faLinkedin}
+											/>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					))}
+					{/* 
 					<div className='box pb-6'>
 						<div className='teachers-box'>
 							<img
@@ -32,7 +86,10 @@ const Teachers = () => {
 							<span>Senior Developer</span>
 							<ul>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://img.freepik.com/free-photo/pile-3d-facebook-logos_1379-875.jpg?w=740'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faFacebook}
@@ -40,7 +97,10 @@ const Teachers = () => {
 									</a>
 								</li>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://img.freepik.com/free-photo/pile-3d-twitter-logos_1379-879.jpg?w=740'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faTwitter}
@@ -48,7 +108,10 @@ const Teachers = () => {
 									</a>
 								</li>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://www.luanwise.co.uk/wp-content/uploads/2021/12/Linkedin-1200x500.jpeg'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faLinkedin}
@@ -58,7 +121,6 @@ const Teachers = () => {
 							</ul>
 						</div>
 					</div>
-
 					<div className='box pb-6'>
 						<div className='teachers-box'>
 							<img
@@ -71,7 +133,10 @@ const Teachers = () => {
 							<span>Software Engineer</span>
 							<ul>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://img.freepik.com/free-photo/pile-3d-facebook-logos_1379-875.jpg?w=740'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faFacebook}
@@ -79,7 +144,10 @@ const Teachers = () => {
 									</a>
 								</li>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://img.freepik.com/free-photo/pile-3d-twitter-logos_1379-879.jpg?w=740'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faTwitter}
@@ -87,7 +155,10 @@ const Teachers = () => {
 									</a>
 								</li>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://www.luanwise.co.uk/wp-content/uploads/2021/12/Linkedin-1200x500.jpeg'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faLinkedin}
@@ -109,7 +180,10 @@ const Teachers = () => {
 							<span>Web Developer</span>
 							<ul>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://img.freepik.com/free-photo/pile-3d-facebook-logos_1379-875.jpg?w=740'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faFacebook}
@@ -117,7 +191,10 @@ const Teachers = () => {
 									</a>
 								</li>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://img.freepik.com/free-photo/pile-3d-twitter-logos_1379-879.jpg?w=740'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faTwitter}
@@ -125,7 +202,10 @@ const Teachers = () => {
 									</a>
 								</li>
 								<li>
-									<a href='/#'>
+									<a
+										target='_blank'
+										rel='noopener noreferrer'
+										href='https://www.luanwise.co.uk/wp-content/uploads/2021/12/Linkedin-1200x500.jpeg'>
 										<FontAwesomeIcon
 											className='text-gray-700 text-3xl mx-2'
 											icon={faLinkedin}
@@ -134,7 +214,7 @@ const Teachers = () => {
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div>*/}
 				</div>
 			</div>
 		</div>

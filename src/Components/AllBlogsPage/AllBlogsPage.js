@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faComment } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import publisherImg from "../../Images/user-demo.png";
 
 const AllBlogsPage = () => {
 	const [blogs, setBlogs] = React.useState();
@@ -16,11 +17,11 @@ const AllBlogsPage = () => {
 	console.log(blogs);
 
 	return (
-		<div className='container mx-auto py-4 md:py-11  '>
+		<div className='container px-8 mx-auto pt-4 mb-10 md:py-11'>
 			<h1 className='text-center text-3xl uppercase font-semibold md:mb-9 mb-5 text-red-500'>
 				Latest Blog & News
 			</h1>
-			<div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mx-auto md:gap-5 gap-4'>
+			<div className='grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mx-auto md:gap-5 gap-4'>
 				{blogs?.map((blog, key) => (
 					<Link key={key} to={`/singleblog/${blog?._id}`}>
 						<div
@@ -28,7 +29,7 @@ const AllBlogsPage = () => {
 							style={{ maxWidth: "400px" }}>
 							<div className='overflow-hidden'>
 								<img
-									className='w-full card-image rounded-t-lg'
+									className='w-full h-56 card-image rounded-t-lg'
 									src={blog?.photo}
 									alt=''
 								/>
@@ -37,6 +38,17 @@ const AllBlogsPage = () => {
 								<h1 className='text-lg font-bold my-5 text-stone-700 hover:text-red-500 duration-300 cursor-pointer text-left'>
 									{blog?.blogName}
 								</h1>
+								<div className='flex items-center mb-6'>
+									<img
+										className='w-8 h-8 rounded-full mr-2'
+										src={publisherImg}
+										alt=''
+									/>
+									<p className='text-gray-900 leading-none text-sm'>
+										<span className='text-gray-400'>By</span>{" "}
+										<strong>{blog?.publisher}</strong>
+									</p>
+								</div>
 								<hr className='border' />
 								<div className='flex justify-evenly pt-2 '>
 									<div className='flex text-stone-500 text-sm'>

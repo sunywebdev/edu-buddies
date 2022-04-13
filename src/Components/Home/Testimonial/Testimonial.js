@@ -31,10 +31,10 @@ const Testimonial = () => {
 		<div className='container mx-auto my-32 px-4 md:px-11'>
 			<div className=' w-full'>
 				<div
-					className='grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-6'
+					className='grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-6'
 					style={{ alignItems: "center" }}>
 					<div className='text-left w-full'>
-						<div className='md:text-4xl text-3xl font-semibold  text-red-500'>
+						<div className='md:text-4xl text-3xl font-semibold  text-red-500 uppercase'>
 							Testimonial
 						</div>
 						<h1 className='md:text-5xl text-4xl font-black md:mb-7 mb-5 mt-3 text-gray-800'>
@@ -95,7 +95,7 @@ const Testimonial = () => {
 														{comment?.reviewer}
 													</div>
 													<div className='text-md text-red-500'>
-														{comment?.role || 'Student'}
+														{comment?.role || "Student"}
 													</div>
 												</div>
 											</div>

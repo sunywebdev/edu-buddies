@@ -7,18 +7,18 @@ import useAuth from "../../../hooks/useAuth";
 import LoadingOverlay from "../../Loading/LoadingOverlay";
 
 const StudentImportantLinks = () => {
-	const { user } = useAuth();
+	const { savedUser } = useAuth();
 	const [showModal, setShowModal] = React.useState(false);
 	const [importantlinks, setImportantlinks] = React.useState();
 	React.useEffect(() => {
 		axios
 			.get(
-				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${user?.email}`,
+				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${savedUser.email}`,
 			)
 			.then((res) => {
 				setImportantlinks(res.data?.importantlinks);
 			});
-	}, [user?.email, showModal]);
+	}, [savedUser, showModal]);
 
 	return (
 		<div className='container mx-auto px-4 md:px-11'>
@@ -70,7 +70,7 @@ const StudentImportantLinks = () => {
 					<Modal setShowModal={setShowModal} />
 				</>
 			) : null}
-			{!user && <LoadingOverlay />}
+			{!savedUser && <LoadingOverlay />}
 		</div>
 	);
 };

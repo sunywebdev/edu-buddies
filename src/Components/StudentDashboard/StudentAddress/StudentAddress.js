@@ -8,30 +8,30 @@ import useAuth from "../../../hooks/useAuth";
 import LoadingOverlay from "../../Loading/LoadingOverlay";
 
 const StudentAddress = () => {
-	const { user } = useAuth();
+	const { savedUser } = useAuth();
 	const [presentAddModal, setPresentAddModal] = React.useState(false);
 	const [permanentAddModal, setPermanentAddModal] = React.useState(false);
 	const [presentaddressUI, setPresentaddressUI] = React.useState();
 	React.useEffect(() => {
 		axios
 			.get(
-				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${user?.email}`,
+				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${savedUser.email}`,
 			)
 			.then((res) => {
 				setPresentaddressUI(res.data?.presentAddress);
 			});
-	}, [user?.email, permanentAddModal, presentAddModal]);
+	}, [savedUser, permanentAddModal, presentAddModal]);
 
 	const [permanentaddressUI, setPermanentaddressUI] = React.useState();
 	React.useEffect(() => {
 		axios
 			.get(
-				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${user?.email}`,
+				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${savedUser.email}`,
 			)
 			.then((res) => {
 				setPermanentaddressUI(res.data?.permanentAddress);
 			});
-	}, [user?.email, permanentAddModal, presentAddModal]);
+	}, [savedUser, permanentAddModal, presentAddModal]);
 
 	return (
 		<div className='container mx-auto px-4 md:px-11'>
@@ -146,7 +146,7 @@ const StudentAddress = () => {
 					<PermanentAdd setPermanentAddModal={setPermanentAddModal} />
 				</>
 			) : null}
-			{!user && <LoadingOverlay />}
+			{!savedUser && <LoadingOverlay />}
 		</div>
 	);
 };

@@ -9,16 +9,17 @@ import LoadingOverlay from "../../Loading/LoadingOverlay";
 const StudentEducation = () => {
 	const [showModal, setShowModal] = React.useState(false);
 	const [education, setEducation] = React.useState();
-	const { user } = useAuth();
+	const { savedUser } = useAuth();
 	React.useEffect(() => {
 		axios
 			.get(
-				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${user?.email}`,
+				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${savedUser.email}`,
 			)
 			.then((res) => {
 				setEducation(res.data?.educationalExp);
 			});
-	}, [user?.email, showModal]);
+	}, [savedUser, showModal]);
+	console.log("education", education);
 
 	return (
 		<div className='container mx-auto px-4 md:px-11'>
@@ -82,7 +83,7 @@ const StudentEducation = () => {
 					<Modal setShowModal={setShowModal} />
 				</>
 			) : null}
-			{!user && <LoadingOverlay />}
+			{!savedUser && <LoadingOverlay />}
 		</div>
 	);
 };

@@ -10,17 +10,17 @@ import Swal from "sweetalert2";
 const StudentSkills = () => {
 	const [showAddSkillModal, setShowAddSkillModal] = React.useState(false);
 	const [deleted, setDeleted] = React.useState(false);
-	const { user } = useAuth();
+	const { savedUser } = useAuth();
 	const [skills, setSkills] = React.useState();
 	React.useEffect(() => {
 		axios
 			.get(
-				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${user?.email}`,
+				`https://fierce-caverns-90976.herokuapp.com/allusers?email=${savedUser.email}`,
 			)
 			.then((res) => {
 				setSkills(res.data);
 			});
-	}, [user?.email, deleted, showAddSkillModal]);
+	}, [savedUser, deleted, showAddSkillModal]);
 	console.log(skills);
 
 	const handleDelete = (skill) => {
@@ -36,7 +36,7 @@ const StudentSkills = () => {
 			if (result.isConfirmed) {
 				axios
 					.put(
-						`https://fierce-caverns-90976.herokuapp.com/skillsetDelete/${user?.email}/${skill}`,
+						`https://fierce-caverns-90976.herokuapp.com/skillsetDelete/${savedUser.email}/${skill}`,
 					)
 					.then(function(response) {
 						Swal.fire("Deleted!", "That mail has been deleted.", "success");
@@ -70,14 +70,9 @@ const StudentSkills = () => {
 			<div className='flex flex-col'>
 				<div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
 					<div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
-						<div
-							className='shadow overflow-hidden border-b border-red-200 sm:rounded-lg'
-							style={{
-								maxWidth: "75vw",
-								overflowX: "scroll",
-							}}>
+						<div className='shadow overflow-hidden border-b border-red-200 sm:rounded-lg tables'>
 							<table className='min-w-full divide-y divide-red-200'>
-								<thead className='bg-black font-bold'>
+								<thead className='bg-slate-900 font-bold'>
 									<tr>
 										<th
 											scope='col'
@@ -141,7 +136,7 @@ const StudentSkills = () => {
 					<AddSkillModal setShowAddSkillModal={setShowAddSkillModal} />
 				</>
 			) : null}
-			{!user && <LoadingOverlay />}
+			{!savedUser && <LoadingOverlay />}
 		</div>
 	);
 };
