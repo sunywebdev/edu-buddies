@@ -1,7 +1,6 @@
 # Edu Buddies
 
 An Online Learning Management System Web Application.
-<<<<<<< HEAD
 
 [Live Website](https://edu-buddies-demo.netlify.app/) | [Backend Server](https://github.com/sunywebdev/edu-buddies-server)
 
